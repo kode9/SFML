@@ -230,13 +230,11 @@ namespace
 
         sf::priv::CloseConnection(connection);
 
-        const char* xcb_name = reinterpret_cast<const char*>(xcb_get_property_value(wmName.get()));
-	// It seems the wm name string is not null
-	// terminated. Retrieve it's length and use strncat to build a
-	// proper string.
-	const int name_size = xcb_get_property_value_length(wmName.get());
-	char name[name_size + 1];
-	std::strncat(name, xcb_name, name_size);
+	// It seems the wm name string reply is not necessarily
+	// null-terminated. The work around is to get its actual
+	// length to build a proper string
+	std::string name(reinterpret_cast<const char*>(xcb_get_property_value(wmName.get())),
+			 xcb_get_property_value_length(wmName.get()));
 
         windowManagerName = name;
 
