@@ -233,10 +233,8 @@ namespace
         // It seems the wm name string reply is not necessarily
         // null-terminated. The work around is to get its actual
         // length to build a proper string
-        std::string name(reinterpret_cast<const char*>(xcb_get_property_value(wmName.get())),
-                         xcb_get_property_value_length(wmName.get()));
-
-        windowManagerName = name;
+        windowManagerName = sf::String(reinterpret_cast<const char*>(xcb_get_property_value(wmName.get())),
+                                       xcb_get_property_value_length(wmName.get()));
 
         return true;
     }

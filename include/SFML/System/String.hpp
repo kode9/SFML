@@ -105,6 +105,20 @@ public:
     String(const char* ansiString, const std::locale& locale = std::locale());
 
     ////////////////////////////////////////////////////////////
+    /// \brief Construct from a C-style ANSI string with given length and a locale
+    ///
+    /// The source string is converted to UTF-32 according to the
+    /// given locale. At most length characters from the inpute
+    /// strings are used.
+    ///
+    /// \param ansiString ANSI string to convert
+    /// \param length     Maximum number of characters to copy
+    /// \param locale     Locale to use for conversion
+    ///
+    ////////////////////////////////////////////////////////////
+    String(const char* ansiString, size_t length, const std::locale& locale = std::locale());
+
+    ////////////////////////////////////////////////////////////
     /// \brief Construct from an ANSI string and a locale
     ///
     /// The source string is converted to UTF-32 according

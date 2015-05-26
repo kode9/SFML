@@ -78,6 +78,15 @@ String::String(const char* ansiString, const std::locale& locale)
     }
 }
 
+////////////////////////////////////////////////////////////
+String::String(const char* ansiString, size_t length, const std::locale& locale)
+{
+    if (ansiString && (length > 0))
+    {
+        m_string.reserve(length + 1);
+        Utf32::fromAnsi(ansiString, ansiString + length, std::back_inserter(m_string), locale);
+    }
+}
 
 ////////////////////////////////////////////////////////////
 String::String(const std::string& ansiString, const std::locale& locale)
